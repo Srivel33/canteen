@@ -206,12 +206,6 @@ class ProfileTab extends StatelessWidget {
                     return InkWell(
                       onTap: () {
                         authState.switchUser(demo);
-                        if (demo.userType == 'admin') {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(builder: (_) => const AdminMainScreen()),
-                          );
-                        }
                       },
                       borderRadius: BorderRadius.circular(10),
                       child: Container(
@@ -264,10 +258,6 @@ class ProfileTab extends StatelessWidget {
               child: OutlinedButton.icon(
                 onPressed: () {
                   authState.logout();
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (_) => const LoginScreen()),
-                  );
                 },
                 icon: const Icon(Icons.logout_rounded, color: Colors.red),
                 label: const Text('Log Out', style: TextStyle(color: Colors.red)),

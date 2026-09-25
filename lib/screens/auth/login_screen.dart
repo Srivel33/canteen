@@ -47,8 +47,6 @@ class _LoginScreenState extends State<LoginScreen> {
         email: _emailController.text.trim(),
         userType: _selectedRole,
       );
-
-      _navigateToHome();
     }
   }
 
@@ -56,22 +54,6 @@ class _LoginScreenState extends State<LoginScreen> {
     final authState = Provider.of<AuthState>(context, listen: false);
     final user = AuthState.demoUsers[index];
     authState.switchUser(user);
-    _navigateToHome();
-  }
-
-  void _navigateToHome() {
-    final authState = Provider.of<AuthState>(context, listen: false);
-    if (authState.isAdmin) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (_) => const AdminMainScreen()),
-      );
-    } else {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (_) => const CustomerMainScreen()),
-      );
-    }
   }
 
   @override

@@ -7,6 +7,7 @@ import 'state/auth_state.dart';
 import 'state/cart_state.dart';
 import 'state/menu_state.dart';
 import 'state/order_state.dart';
+import 'state/app_navigation_state.dart';
 import 'theme/app_theme.dart';
 
 void main() {
@@ -21,6 +22,7 @@ class CanteenApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider(create: (_) => AppNavigationState()),
         ChangeNotifierProvider(create: (_) => AuthState()),
         ChangeNotifierProvider(create: (_) => MenuState()),
         ChangeNotifierProvider(create: (_) => CartState()),

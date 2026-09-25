@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import '../../state/auth_state.dart';
 import '../../state/order_state.dart';
 import '../../theme/app_theme.dart';
+import '../../state/app_navigation_state.dart';
 import '../admin/admin_main_screen.dart';
 import 'menu_screen.dart';
 import 'profile_tab.dart';
@@ -22,6 +23,7 @@ class _CustomerMainScreenState extends State<CustomerMainScreen> {
   Widget build(BuildContext context) {
     final authState = Provider.of<AuthState>(context);
     final orderState = Provider.of<OrderState>(context);
+    final navState = Provider.of<AppNavigationState>(context);
     final user = authState.currentUser;
 
     final activeOrdersCount = user != null
@@ -31,7 +33,7 @@ class _CustomerMainScreenState extends State<CustomerMainScreen> {
     final screens = [
       const MenuScreen(),
       TokenStatusScreen(
-        onGoToMenu: () => setState(() => _currentIndex = 0),
+        onGoToMenu: () => navState.setIndex(0),
       ),
       const ProfileTab(),
     ];
@@ -107,10 +109,9 @@ class _CustomerMainScreenState extends State<CustomerMainScreen> {
           // Switch to Kitchen Portal quick button
           TextButton.icon(
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (_) => const AdminMainScreen()),
-              );
+              // Switch to the admin demo user
+              final adminUser = AuthState.demoUsers.firstWhere((u) => u.userType == 'admin');
+              authState.switchUser(adminUser);
             },
             icon: const Icon(Icons.soup_kitchen_rounded, size: 16, color: AppTheme.textSecondary),
             label: const Text(
@@ -121,12 +122,12 @@ class _CustomerMainScreenState extends State<CustomerMainScreen> {
         ],
       ),
       body: IndexedStack(
-        index: _currentIndex,
+        index: navState.currentIndex,
         children: screens,
       ),
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: (index) => setState(() => _currentIndex = index),
+        currentIndex: navState.currentIndex,
+        onTap: (index) => navState.setIndex(index),
         items: [
           const BottomNavigationBarItem(
             icon: Icon(Icons.restaurant_menu_rounded),

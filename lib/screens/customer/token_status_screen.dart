@@ -167,10 +167,8 @@ class _TokenStatusScreenState extends State<TokenStatusScreen>
                             ),
                           TokenCard(
                             order: order,
-                            showAdvanceButton: true,
-                            onAdvanceStatus: () {
-                              orderState.advanceOrderStatus(order.id);
-                            },
+                            showAdvanceButton: false,
+                            onAdvanceStatus: null,
                           ),
                         ],
                       );

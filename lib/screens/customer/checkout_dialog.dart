@@ -4,6 +4,7 @@ import '../../models/OrderModel.dart';
 import '../../state/auth_state.dart';
 import '../../state/cart_state.dart';
 import '../../state/order_state.dart';
+import '../../state/app_navigation_state.dart';
 import '../../theme/app_theme.dart';
 
 class CheckoutDialog extends StatefulWidget {
@@ -186,7 +187,9 @@ class _CheckoutDialogState extends State<CheckoutDialog> {
               height: 50,
               child: ElevatedButton(
                 onPressed: () {
-                  Navigator.of(ctx).pop();
+                  Navigator.of(ctx).pop(); // pop success dialog
+                  Navigator.of(context).pop(); // pop cart screen
+                  Provider.of<AppNavigationState>(context, listen: false).setIndex(1);
                 },
                 child: const Text(
                   'View Active Orders & Tokens',

@@ -66,10 +66,6 @@ class _AdminMainScreenState extends State<AdminMainScreen>
               if (authState.isAdmin) {
                 authState.switchUser(AuthState.demoUsers[0]);
               }
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (_) => const CustomerMainScreen()),
-              );
             },
             icon: const Icon(Icons.school_rounded, color: Colors.amber, size: 16),
             label: const Text(
